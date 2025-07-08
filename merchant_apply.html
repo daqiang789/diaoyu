@@ -3,193 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商家入驻申请</title>
+    <title>商家入驻申请 - 美化版</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 引入 Google Fonts 的 Inter 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide-static@latest/dist/lucide.min.js"></script>
     <style>
+        :root {
+            --background: #F8F9FA;
+            --card-background: #FFFFFF;
+            --primary: #007AFF;
+            --primary-gradient-start: #3B82F6; /* blue-500 */
+            --primary-gradient-end: #8B5CF6;   /* violet-500 */
+            --text-primary: #1a202c;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+        }
         body {
             width: 375px;
             height: 812px;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* 隐藏水平滚动条 */
-            overflow-y: auto; /* 允许垂直滚动 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            background-color: #f8f9fa; /* 浅灰色背景 */
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--background);
             display: flex;
             flex-direction: column;
         }
-        .form-section {
-            background-color: white;
-            border-radius: 1.5rem; /* 大圆角 */
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 轻微阴影 */
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+        .gradient-button {
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: all 0.3s ease;
+        }
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
         .input-field {
             width: 100%;
             padding: 0.75rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem; /* 圆角 */
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
             font-size: 1rem;
-            color: #4a5568;
+            color: var(--text-primary);
+            background-color: white;
             outline: none;
-            transition: border-color 0.2s ease-in-out;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         .input-field:focus {
-            border-color: #6a82fb; /* 聚焦时边框颜色 */
-        }
-        .upload-area {
-            border: 2px dashed #cbd5e0;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            text-align: center;
-            color: #a0aec0;
-            cursor: pointer;
-            transition: border-color 0.2s ease-in-out;
-        }
-        .upload-area:hover {
-            border-color: #6a82fb;
-        }
-        .gradient-button {
-            background: linear-gradient(to right, #6a82fb, #fc5c7d); /* 清新柔和的渐变 */
-            box-shadow: 0 4px 10px rgba(106, 130, 251, 0.3);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         .tag-button {
             padding: 0.5rem 1rem;
-            border-radius: 9999px; /* 全圆角 */
-            background-color: #e2e8f0; /* 默认背景 */
-            color: #4a5568; /* 默认文字颜色 */
-            font-size: 0.875rem; /* text-sm */
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-secondary);
         }
         .tag-button.selected {
-            background: linear-gradient(to right, #6a82fb, #fc5c7d); /* 选中渐变背景 */
+            background-color: var(--primary);
             color: white;
-            box-shadow: 0 2px 8px rgba(106, 130, 251, 0.3);
+            border-color: var(--primary);
         }
     </style>
 </head>
 <body class="relative">
-    <!-- 顶部区域 - 模拟小程序胶囊按钮和返回 -->
-    <div class="relative w-full pt-4 pb-2 px-4 bg-transparent z-20">
-        <!-- 胶囊按钮占位，实际由UI.html的phone-frame处理 -->
+    <!-- 顶部导航 -->
+    <div class="w-full pt-4 pb-3 px-4 bg-white/80 backdrop-blur-sm z-20 border-b border-gray-100 sticky top-0">
+        <!-- 胶囊按钮占位 -->
         <div class="h-7"></div> 
-        <div class="absolute top-4 left-4 bg-white rounded-full p-2 shadow-md">
-            <i class="fas fa-chevron-left text-gray-700"></i>
+        <div class="flex items-center justify-between mt-2 relative">
+            <button class="absolute left-0">
+                <i data-lucide="arrow-left" class="icon text-gray-800"></i>
+            </button>
+            <h1 class="text-lg font-bold text-text-primary text-center flex-grow">商家入驻申请</h1>
         </div>
     </div>
 
     <!-- 申请表单主体 -->
-    <div class="flex-1 p-4 -mt-16 relative z-10">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">商家入驻申请</h1>
-
+    <div class="flex-1 overflow-y-auto p-4 pb-24 space-y-6">
         <!-- 资质信息 -->
-        <div class="form-section">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">资质信息</h2>
-            <div class="mb-4">
-                <label for="merchantName" class="block text-gray-700 text-sm font-medium mb-2">商家名称</label>
+        <div class="space-y-4">
+            <h2 class="text-base font-bold text-text-primary">资质信息</h2>
+            <div>
+                <label for="merchantName" class="input-label">商家名称</label>
                 <input type="text" id="merchantName" placeholder="请输入您的商家名称" class="input-field">
             </div>
-            <div class="mb-4">
-                <label for="contactPerson" class="block text-gray-700 text-sm font-medium mb-2">联系人</label>
+            <div>
+                <label for="contactPerson" class="input-label">联系人</label>
                 <input type="text" id="contactPerson" placeholder="请输入联系人姓名" class="input-field">
             </div>
-            <div class="mb-4">
-                <label for="contactPhone" class="block text-gray-700 text-sm font-medium mb-2">联系电话</label>
+            <div>
+                <label for="contactPhone" class="input-label">联系电话</label>
                 <input type="tel" id="contactPhone" placeholder="请输入联系电话" class="input-field">
             </div>
             <div>
-                <label class="block text-gray-700 text-sm font-medium mb-2">营业执照上传</label>
-                <div class="upload-area">
-                    <i class="fas fa-cloud-arrow-up text-4xl mb-2"></i>
-                    <p>点击上传营业执照图片</p>
-                </div>
-                <!-- 模拟图片预览 -->
-                <div class="flex flex-wrap gap-2 mt-2">
-                    <img src="https://source.unsplash.com/random/100x100?document" alt="营业执照预览" class="w-24 h-24 object-cover rounded-lg border border-gray-200">
+                <label class="input-label">营业执照上传</label>
+                <div class="w-full h-32 border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary">
+                    <i data-lucide="upload-cloud" class="w-8 h-8 text-gray-400 mb-2"></i>
+                    <p class="text-sm text-text-secondary">点击上传图片</p>
                 </div>
             </div>
         </div>
+
+        <!-- 分割线 -->
+        <hr class="border-gray-200">
 
         <!-- 钓场基本信息 -->
-        <div class="form-section">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">钓场基本信息</h2>
-            <div class="mb-4">
-                <label for="fishingSpotName" class="block text-gray-700 text-sm font-medium mb-2">钓场名称</label>
+        <div class="space-y-4">
+            <h2 class="text-base font-bold text-text-primary">钓场基本信息</h2>
+            <div>
+                <label for="fishingSpotName" class="input-label">钓场名称</label>
                 <input type="text" id="fishingSpotName" placeholder="请输入钓场名称" class="input-field">
             </div>
-            <div class="mb-4">
-                <label for="fishingSpotPhone" class="block text-gray-700 text-sm font-medium mb-2">钓场电话</label>
-                <input type="tel" id="fishingSpotPhone" placeholder="请输入钓场联系电话" class="input-field">
-            </div>
-            <div class="mb-4">
-                <label for="address" class="block text-gray-700 text-sm font-medium mb-2">详细地址</label>
+            <div>
+                <label for="address" class="input-label">详细地址</label>
                 <input type="text" id="address" placeholder="请输入钓场详细地址" class="input-field">
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">钓场定位</label>
-                <button class="w-full py-3 rounded-xl border border-blue-600 text-blue-600 font-semibold flex items-center justify-center">
-                    <i class="fas fa-map-marker-alt mr-2"></i>
+            <div>
+                <label class="input-label">钓场定位</label>
+                <button class="w-full py-3 rounded-xl border-2 border-dashed border-gray-300 text-primary font-semibold flex items-center justify-center gap-2 hover:border-primary">
+                    <i data-lucide="map-pin" class="icon"></i>
                     <span>在地图上选择钓场位置</span>
                 </button>
-                <p class="text-gray-500 text-xs mt-2">已选择：XX省XX市XX区XX街道123号 (经度: 116.39, 纬度: 39.90)</p>
             </div>
             <div>
-                <label for="description" class="block text-gray-700 text-sm font-medium mb-2">钓场介绍</label>
+                <label for="description" class="input-label">钓场介绍</label>
                 <textarea id="description" rows="4" placeholder="请详细描述钓场特色、环境等信息..." class="input-field"></textarea>
-            </div>
-            <div class="mt-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">钓场环境图片</label>
-                <div class="upload-area">
-                    <i class="fas fa-camera text-4xl mb-2"></i>
-                    <p>点击上传钓场环境图片 (最多9张)</p>
-                </div>
-                <!-- 模拟图片预览 -->
-                <div class="flex flex-wrap gap-2 mt-2">
-                    <img src="https://source.unsplash.com/random/100x100?fishing-environment-2" alt="环境图片1" class="w-24 h-24 object-cover rounded-lg border border-gray-200">
-                    <img src="https://source.unsplash.com/random/100x100?fishing-environment-3" alt="环境图片2" class="w-24 h-24 object-cover rounded-lg border border-gray-200">
-                </div>
             </div>
         </div>
 
+        <!-- 分割线 -->
+        <hr class="border-gray-200">
+
         <!-- 详细信息 -->
-        <div class="form-section">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">详细信息</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">收费标准</label>
-                <input type="text" placeholder="如：80元/天，回鱼5元/斤" class="input-field">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">开放时间</label>
-                <input type="text" placeholder="如：08:00 - 22:00，支持夜钓" class="input-field">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">主要鱼种</label>
+        <div class="space-y-4">
+            <h2 class="text-base font-bold text-text-primary">详细信息</h2>
+            <div>
+                <label class="input-label">主要鱼种</label>
                 <div class="flex flex-wrap gap-3">
                     <span class="tag-button">鲫鱼</span>
-                    <span class="tag-button">鲤鱼</span>
+                    <span class="tag-button selected">鲤鱼</span>
                     <span class="tag-button">草鱼</span>
                     <span class="tag-button">鲈鱼</span>
                 </div>
             </div>
             <div>
-                <label class="block text-gray-700 text-sm font-medium mb-2">特色服务</label>
+                <label class="input-label">特色服务</label>
                 <div class="flex flex-wrap gap-3">
-                    <span class="tag-button">钓位预约</span>
+                    <span class="tag-button selected">钓位预约</span>
                     <span class="tag-button">夜钓开放</span>
                     <span class="tag-button">设备租借</span>
                     <span class="tag-button">餐饮服务</span>
-                    <span class="tag-button">免费停车</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 底部提交按钮 -->
-    <div class="w-full p-4 bg-white shadow-lg">
-        <button class="w-full py-3 text-white rounded-full font-semibold gradient-button">提交申请</button>
+    <div class="absolute bottom-0 left-0 w-full p-3 bg-white/80 backdrop-blur-sm border-t border-gray-100 z-30">
+        <button class="w-full py-3 text-white rounded-full font-semibold text-base gradient-button">
+            提交申请
+        </button>
     </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

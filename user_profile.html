@@ -3,94 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人中心</title>
+    <title>个人中心 - 美化版</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 引入 Google Fonts 的 Inter 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide-static@latest/dist/lucide.min.js"></script>
     <style>
+        :root {
+            --background: #F8F9FA;
+            --card-background: #FFFFFF;
+            --primary: #007AFF;
+            --primary-gradient-start: #3B82F6;
+            --primary-gradient-end: #6D28D9;
+            --text-primary: #1a202c;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(149, 157, 165, 0.1);
+        }
         body {
             width: 375px;
             height: 812px;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* 隐藏滚动条 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            background-color: #f8f9fa; /* 浅灰色背景 */
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--background);
         }
-        .profile-header-gradient {
-            background: linear-gradient(to right top, #6a82fb, #fc5c7d); /* 清新柔和的渐变 */
-            padding-top: 4rem; /* 留出胶囊按钮和顶部空间 */
-            padding-bottom: 2rem;
-            border-bottom-left-radius: 2rem;
-            border-bottom-right-radius: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        .icon {
+            width: 22px;
+            height: 22px;
+            stroke-width: 2;
         }
-        .section-card {
-            background-color: white;
-            border-radius: 1.5rem; /* 大圆角 */
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 轻微阴影 */
+        .soft-shadow {
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
-        .list-item {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #f0f2f5; /* 浅色分割线 */
-            cursor: pointer;
-        }
-        .list-item:last-child {
-            border-bottom: none;
+        .header-gradient {
+            background-image: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
         }
     </style>
 </head>
-<body class="relative">
-    <!-- 顶部区域 - 模拟小程序胶囊按钮 -->
-    <div class="relative w-full pt-4 pb-2 px-4 bg-transparent z-20">
-        <!-- 胶囊按钮占位，实际由UI.html的phone-frame处理 -->
-        <div class="h-7"></div> 
+<body>
+    <!-- 顶部区域 -->
+    <div class="relative w-full z-10">
+        <div class="header-gradient pt-12 pb-24">
+            <!-- 胶囊按钮占位 -->
+            <div class="h-7"></div>
+            <div class="px-5 mt-2 flex items-center gap-4">
+                <img src="https://source.unsplash.com/random/100x100?avatar,man,face" alt="用户头像" class="w-20 h-20 rounded-full border-4 border-white/50">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">钓鱼小能手</h1>
+                    <p class="text-sm text-white/80 mt-1">ID: 888888</p>
+                </div>
+                <button class="ml-auto self-start">
+                    <i data-lucide="settings-2" class="w-6 h-6 text-white/80"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- 个人中心头部 -->
-    <div class="profile-header-gradient flex flex-col items-center text-white -mt-16 relative z-10">
-        <img src="https://source.unsplash.com/random/100x100?avatar,man" alt="用户头像" class="w-24 h-24 rounded-full border-4 border-white shadow-md mb-3">
-        <h1 class="text-2xl font-bold">钓鱼小能手</h1>
-        <p class="text-sm opacity-80">ID: 888888</p>
-    </div>
-
-    <!-- 功能入口列表 -->
-    <div class="flex-1 overflow-y-auto p-4 -mt-8 relative z-10">
-        <div class="section-card">
-            <div class="list-item">
-                <i class="fas fa-user-edit text-blue-500 text-xl mr-4"></i>
-                <span class="flex-grow text-gray-800 text-lg">资料编辑</span>
-                <i class="fas fa-chevron-right text-gray-400"></i>
+    <!-- 主内容区 -->
+    <div class="relative z-20 -mt-16 px-4 space-y-5">
+        <!-- 数据统计卡片 -->
+        <div class="bg-white rounded-2xl soft-shadow p-4 flex justify-around text-center">
+            <div class="cursor-pointer">
+                <p class="text-xl font-bold text-text-primary">12</p>
+                <p class="text-xs text-text-secondary mt-1">我的收藏</p>
             </div>
-            <div class="list-item">
-                <i class="fas fa-bookmark text-yellow-500 text-xl mr-4"></i>
-                <span class="flex-grow text-gray-800 text-lg">我的收藏</span>
-                <i class="fas fa-chevron-right text-gray-400"></i>
+            <div class="cursor-pointer">
+                <p class="text-xl font-bold text-text-primary">35</p>
+                <p class="text-xs text-text-secondary mt-1">我的足迹</p>
             </div>
-            <div class="list-item">
-                <i class="fas fa-toolbox text-green-500 text-xl mr-4"></i>
-                <span class="flex-grow text-gray-800 text-lg">我的装备库</span>
-                <i class="fas fa-chevron-right text-gray-400"></i>
+            <div class="cursor-pointer">
+                <p class="text-xl font-bold text-text-primary">8</p>
+                <p class="text-xs text-text-secondary mt-1">装备库</p>
             </div>
-            <div class="list-item">
-                <i class="fas fa-handshake text-purple-500 text-xl mr-4"></i>
-                <span class="flex-grow text-gray-800 text-lg">商家入驻申请</span>
-                <i class="fas fa-chevron-right text-gray-400"></i>
-            </div>
-            <div class="list-item">
-                <i class="fas fa-cog text-gray-500 text-xl mr-4"></i>
-                <span class="flex-grow text-gray-800 text-lg">设置</span>
-                <i class="fas fa-chevron-right text-gray-400"></i>
+            <div class="cursor-pointer">
+                <p class="text-xl font-bold text-text-primary">3</p>
+                <p class="text-xs text-text-secondary mt-1">优惠券</p>
             </div>
         </div>
 
-        <!-- 占位内容，确保页面可滚动 -->
-        <div class="h-20"></div>
+        <!-- 核心功能卡片 -->
+        <div class="bg-white rounded-2xl soft-shadow p-2">
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <i data-lucide="user" class="icon text-blue-500"></i>
+                    <span class="font-medium text-text-primary">编辑资料</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-text-secondary"></i>
+            </div>
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <i data-lucide="shield-check" class="icon text-green-500"></i>
+                    <span class="font-medium text-text-primary">商家入驻申请</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-text-secondary"></i>
+            </div>
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <i data-lucide="message-square" class="icon text-orange-500"></i>
+                    <span class="font-medium text-text-primary">我的客服</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-text-secondary"></i>
+            </div>
+        </div>
+
+        <!-- 其他功能卡片 -->
+        <div class="bg-white rounded-2xl soft-shadow p-2">
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <i data-lucide="info" class="icon text-gray-500"></i>
+                    <span class="font-medium text-text-primary">关于我们</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-text-secondary"></i>
+            </div>
+            <div class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <i data-lucide="log-out" class="icon text-red-500"></i>
+                    <span class="font-medium text-text-primary">退出登录</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-text-secondary"></i>
+            </div>
+        </div>
     </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

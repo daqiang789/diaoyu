@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>钓场宝小程序 UI 预览</title>
+    <title>钓场宝小程序 UI 预览 - 美化版</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2f9; /* 更柔和的背景色 */
+            padding: 40px;
+        }
+        .container {
             display: flex;
             flex-wrap: wrap; /* 允许换行 */
             gap: 40px; /* iframe 之间的间距 */
-            padding: 40px;
-            background-color: #f0f2f5; /* 浅灰色背景 */
             justify-content: flex-start; /* 从左侧开始排列 */
             align-items: flex-start; /* 顶部对齐 */
         }
         .phone-frame {
             width: 375px;
             height: 812px;
-            border: 8px solid #333; /* 模拟手机边框 */
+            border: 8px solid #1a202c; /* 深色边框 */
             border-radius: 40px; /* 手机圆角 */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px -10px rgba(26, 32, 44, 0.3);
             overflow: hidden; /* 隐藏滚动条 */
             position: relative;
             background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .phone-frame:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px -10px rgba(26, 32, 44, 0.35);
         }
         .phone-frame iframe {
             width: 100%;
@@ -31,61 +42,61 @@
             border: none;
             display: block;
         }
-        /* 模拟胶囊按钮 */
-        .capsule-button {
+        /* 模拟刘海屏 */
+        .notch {
             position: absolute;
-            top: 15px; /* 调整位置 */
-            right: 15px; /* 调整位置 */
-            width: 80px;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
             height: 28px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 14px;
-            border: 0.5px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            z-index: 10; /* 确保在最上层 */
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 0 5px;
+            background-color: #1a202c;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 20;
         }
-        .capsule-button::before, .capsule-button::after {
-            content: '';
-            display: block;
-            width: 1px;
-            height: 16px;
-            background-color: rgba(0, 0, 0, 0.1);
+        .page-title {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 40px;
         }
     </style>
 </head>
 <body>
-    <!-- 钓场列表页 -->
-    <div class="phone-frame">
-        <div class="capsule-button"></div>
-        <iframe src="fishing_spot_list.html" title="钓场列表页"></iframe>
-    </div>
+    <h1 class="page-title">【钓场宝】小程序 UI 预览 - 美化版</h1>
+    <div class="container">
+        <!-- 钓场列表页 -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <iframe src="fishing_spot_list.html" title="钓场列表页"></iframe>
+        </div>
 
-    <!-- 钓场详情页 -->
-    <div class="phone-frame">
-        <div class="capsule-button"></div>
-        <iframe src="fishing_spot_detail.html" title="钓场详情页"></iframe>
-    </div>
+        <!-- 钓场详情页 -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <iframe src="fishing_spot_detail.html" title="钓场详情页"></iframe>
+        </div>
 
-    <!-- 搜索筛选页 -->
-    <div class="phone-frame">
-        <div class="capsule-button"></div>
-        <iframe src="search_filter.html" title="搜索筛选页"></iframe>
-    </div>
+        <!-- 搜索筛选页 -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <iframe src="search_filter.html" title="搜索筛选页"></iframe>
+        </div>
 
-    <!-- 个人中心页 -->
-    <div class="phone-frame">
-        <div class="capsule-button"></div>
-        <iframe src="user_profile.html" title="个人中心页"></iframe>
-    </div>
+        <!-- 个人中心页 -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <iframe src="user_profile.html" title="个人中心页"></iframe>
+        </div>
 
-    <!-- 商家入驻申请页 -->
-    <div class="phone-frame">
-        <div class="capsule-button"></div>
-        <iframe src="merchant_apply.html" title="商家入驻申请页"></iframe>
+        <!-- 商家入驻申请页 -->
+        <div class="phone-frame">
+            <div class="notch"></div>
+            <iframe src="merchant_apply.html" title="商家入驻申请页"></iframe>
+        </div>
     </div>
 </body>
 </html>

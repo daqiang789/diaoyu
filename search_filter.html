@@ -3,68 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>搜索筛选</title>
+    <title>搜索筛选 - 美化版</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- 引入 Google Fonts 的 Inter 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide-static@latest/dist/lucide.min.js"></script>
     <style>
+        :root {
+            --background: #F8F9FA;
+            --card-background: #FFFFFF;
+            --primary: #007AFF;
+            --primary-gradient-start: #3B82F6; /* blue-500 */
+            --primary-gradient-end: #8B5CF6;   /* violet-500 */
+            --text-primary: #1a202c;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+        }
         body {
             width: 375px;
             height: 812px;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* 隐藏滚动条 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            background-color: #f8f9fa; /* 浅灰色背景 */
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--background);
             display: flex;
             flex-direction: column;
         }
-        .filter-section {
-            background-color: white;
-            border-radius: 1.5rem; /* 大圆角 */
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 轻微阴影 */
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+        .gradient-button {
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            transition: all 0.3s ease;
         }
         .tag-button {
             padding: 0.5rem 1rem;
-            border-radius: 9999px; /* 全圆角 */
-            background-color: #e2e8f0; /* 默认背景 */
-            color: #4a5568; /* 默认文字颜色 */
-            font-size: 0.875rem; /* text-sm */
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-secondary);
         }
         .tag-button.selected {
-            background: linear-gradient(to right, #6a82fb, #fc5c7d); /* 选中渐变背景 */
+            background-color: var(--primary);
             color: white;
-            box-shadow: 0 2px 8px rgba(106, 130, 251, 0.3);
-        }
-        .gradient-button {
-            background: linear-gradient(to right, #6a82fb, #fc5c7d); /* 清新柔和的渐变 */
-            box-shadow: 0 4px 10px rgba(106, 130, 251, 0.3);
+            border-color: var(--primary);
         }
     </style>
 </head>
 <body class="relative">
-    <!-- 顶部区域 - 模拟小程序胶囊按钮和搜索框 -->
-    <div class="relative w-full pt-4 pb-2 px-4 bg-white shadow-sm z-10">
-        <!-- 胶囊按钮占位，实际由UI.html的phone-frame处理 -->
+    <!-- 顶部导航 -->
+    <div class="w-full pt-4 pb-3 px-4 bg-white/80 backdrop-blur-sm z-20 border-b border-gray-100">
+        <!-- 胶囊按钮占位 -->
         <div class="h-7"></div> 
-        <div class="flex items-center mt-2">
-            <div class="flex-grow flex items-center bg-gray-100 rounded-full py-2 px-4 text-gray-500 text-sm">
-                <i class="fas fa-search mr-2"></i>
-                <input type="text" placeholder="搜索钓场、鱼种..." class="bg-transparent outline-none flex-grow text-gray-700">
-                <i class="fas fa-times-circle ml-2 text-gray-400 hidden"></i> <!-- 清除按钮，默认隐藏 -->
-            </div>
-            <button class="ml-4 text-blue-600 font-semibold">取消</button>
+        <div class="flex items-center justify-between mt-2 relative">
+            <button class="absolute left-0">
+                <i data-lucide="arrow-left" class="icon text-gray-800"></i>
+            </button>
+            <h1 class="text-lg font-bold text-text-primary text-center flex-grow">筛选与搜索</h1>
+            <button class="absolute right-0 text-sm font-medium text-primary">
+                重置
+            </button>
         </div>
     </div>
 
     <!-- 筛选内容区域 -->
-    <div class="flex-1 overflow-y-auto p-4">
+    <div class="flex-1 overflow-y-auto p-4 pb-24 space-y-6">
         <!-- 钓场类型 -->
-        <div class="filter-section">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">钓场类型</h2>
+        <div>
+            <h2 class="text-base font-bold text-text-primary mb-3">钓场类型</h2>
             <div class="flex flex-wrap gap-3">
                 <span class="tag-button selected">黑坑</span>
                 <span class="tag-button">水库</span>
@@ -75,22 +91,28 @@
         </div>
 
         <!-- 价格区间 -->
-        <div class="filter-section">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">价格区间</h2>
-            <div class="flex flex-wrap gap-3">
-                <span class="tag-button">30元以内</span>
-                <span class="tag-button">30-50元</span>
-                <span class="tag-button selected">50-100元</span>
-                <span class="tag-button">100元以上</span>
+        <div>
+            <h2 class="text-base font-bold text-text-primary mb-4">价格区间</h2>
+            <div class="relative h-10">
+                <!-- 模拟滑块轨道 -->
+                <div class="absolute top-1/2 -translate-y-1/2 w-full h-1 bg-gray-200 rounded-full"></div>
+                <!-- 模拟滑块选中范围 -->
+                <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-primary rounded-full" style="left: 20%; width: 50%;"></div>
+                <!-- 模拟滑块控制点 -->
+                <div class="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white border-2 border-primary rounded-full shadow" style="left: 20%;"></div>
+                <div class="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white border-2 border-primary rounded-full shadow" style="left: 70%;"></div>
+                <!-- 价格标签 -->
+                <div class="absolute -bottom-4 text-xs text-text-secondary" style="left: 20%; transform: translateX(-50%);">¥50</div>
+                <div class="absolute -bottom-4 text-xs text-text-secondary" style="left: 70%; transform: translateX(-50%);">¥150</div>
             </div>
         </div>
 
         <!-- 特色服务 -->
-        <div class="filter-section">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">特色服务</h2>
+        <div>
+            <h2 class="text-base font-bold text-text-primary mb-3">特色服务</h2>
             <div class="flex flex-wrap gap-3">
                 <span class="tag-button">有停车场</span>
-                <span class="tag-button">提供餐饮</span>
+                <span class="tag-button selected">提供餐饮</span>
                 <span class="tag-button">可夜钓</span>
                 <span class="tag-button">设备租借</span>
                 <span class="tag-button">有住宿</span>
@@ -99,44 +121,43 @@
         </div>
 
         <!-- 鱼种 -->
-        <div class="filter-section">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">鱼种</h2>
+        <div>
+            <h2 class="text-base font-bold text-text-primary mb-3">鱼种</h2>
             <div class="flex flex-wrap gap-3">
                 <span class="tag-button">鲫鱼</span>
-                <span class="tag-button">鲤鱼</span>
+                <span class="tag-button selected">鲤鱼</span>
                 <span class="tag-button">草鱼</span>
                 <span class="tag-button">青鱼</span>
                 <span class="tag-button">鲢鱼</span>
                 <span class="tag-button">鲈鱼</span>
-                <span class="tag-button">鳜鱼</span>
-                <span class="tag-button">翘嘴</span>
             </div>
         </div>
-
-        <!-- 开放时间 -->
-        <div class="filter-section">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">开放时间</h2>
-            <div class="flex flex-wrap gap-3">
-                <span class="tag-button">全天</span>
-                <span class="tag-button">白天</span>
-                <span class="tag-button">夜间</span>
-            </div>
-        </div>
-
+        
         <!-- 地图区域搜索 -->
-        <div class="filter-section flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-gray-800">地图区域搜索</h2>
-            <button class="py-2 px-4 rounded-full border border-blue-600 text-blue-600 font-semibold">
-                <i class="fas fa-map-marked-alt mr-2"></i>
-                选择区域
-            </button>
+        <div>
+            <h2 class="text-base font-bold text-text-primary mb-3">地图搜索</h2>
+            <div class="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="map" class="icon text-primary"></i>
+                    <div>
+                        <p class="font-semibold text-text-primary">在地图上选择区域</p>
+                        <p class="text-xs text-text-secondary">查找附近的钓场</p>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="icon text-text-tertiary"></i>
+            </div>
         </div>
     </div>
 
     <!-- 底部操作按钮 -->
-    <div class="w-full p-4 bg-white shadow-lg flex justify-between items-center">
-        <button class="flex-1 py-3 mr-2 text-gray-700 border border-gray-300 rounded-full font-semibold">重置</button>
-        <button class="flex-1 py-3 ml-2 text-white rounded-full font-semibold gradient-button">确定</button>
+    <div class="absolute bottom-0 left-0 w-full p-3 bg-white/80 backdrop-blur-sm border-t border-gray-100 z-30">
+        <button class="w-full py-3 text-white rounded-full font-semibold text-base gradient-button">
+            查看 28 个结果
+        </button>
     </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
