@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钓场详情</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            width: 375px;
+            height: 812px;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* 隐藏水平滚动条 */
+            overflow-y: auto; /* 允许垂直滚动 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: #f8f9fa; /* 浅灰色背景 */
+            display: flex;
+            flex-direction: column;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem; /* 大圆角 */
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 轻微阴影 */
+        }
+        .gradient-button {
+            background: linear-gradient(to right, #6a82fb, #fc5c7d); /* 清新柔和的渐变 */
+            box-shadow: 0 4px 10px rgba(106, 130, 251, 0.3);
+        }
+        .weather-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- 顶部区域 - 模拟小程序胶囊按钮和返回 -->
+    <div class="relative w-full pt-4 pb-2 px-4 bg-transparent z-20">
+        <!-- 胶囊按钮占位，实际由UI.html的phone-frame处理 -->
+        <div class="h-7"></div> 
+        <div class="absolute top-4 left-4 bg-white rounded-full p-2 shadow-md">
+            <i class="fas fa-chevron-left text-gray-700"></i>
+        </div>
+    </div>
+
+    <!-- 轮播图 -->
+    <div class="w-full h-64 relative -mt-16">
+        <img src="https://source.unsplash.com/random/800x400?fishing-spot-1" alt="钓场图片1" class="w-full h-full object-cover">
+        <!-- 轮播指示器占位 -->
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            <span class="w-2 h-2 bg-white rounded-full opacity-75"></span>
+            <span class="w-2 h-2 bg-gray-400 rounded-full opacity-50"></span>
+            <span class="w-2 h-2 bg-gray-400 rounded-full opacity-50"></span>
+        </div>
+    </div>
+
+    <!-- 钓场信息主体 -->
+    <div class="flex-1 p-4 -mt-8 relative z-10">
+        <!-- 钓场名称与评分 -->
+        <div class="section-card pt-6 -mt-8">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">碧波湖钓场</h1>
+            <div class="flex items-center mb-2">
+                <div class="flex text-yellow-400 text-sm mr-2">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="text-gray-600 text-sm">4.8分 (200+评价)</span>
+            </div>
+            <p class="text-gray-600 text-sm flex items-center">
+                <i class="fas fa-location-dot mr-2 text-blue-500"></i>
+                <span>XX省XX市XX区XX街道123号</span>
+                <span class="ml-auto text-blue-500 font-semibold">导航</span>
+            </p>
+        </div>
+
+        <!-- 基础信息 -->
+        <div class="section-card">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">基础信息</h2>
+            <div class="grid grid-cols-2 gap-4 text-gray-700 text-sm">
+                <div>
+                    <p class="font-medium mb-1">收费标准:</p>
+                    <p>¥80/天 (回鱼 ¥5/斤)</p>
+                </div>
+                <div>
+                    <p class="font-medium mb-1">鱼种分布:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">鲫鱼</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">鲤鱼</span>
+                        <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs">草鱼</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-medium mb-1">水深数据:</p>
+                    <p>平均水深 2.5m, 最深 4m</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 实时天气与天气预报 -->
+        <div class="section-card">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">天气情况</h2>
+            <div class="flex items-center mb-4">
+                <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="天气图标" class="weather-icon mr-3">
+                <div>
+                    <p class="text-3xl font-bold text-gray-800">28°C</p>
+                    <p class="text-gray-600">晴，微风</p>
+                </div>
+            </div>
+            <div class="flex justify-around text-center text-sm text-gray-700">
+                <!-- 未来几天天气预报 -->
+                <div class="flex flex-col items-center">
+                    <p>今天</p>
+                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="天气图标" class="weather-icon">
+                    <p>25°/30°</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p>明天</p>
+                    <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="天气图标" class="weather-icon">
+                    <p>24°/29°</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p>后天</p>
+                    <img src="https://openweathermap.org/img/wn/09d@2x.png" alt="天气图标" class="weather-icon">
+                    <p>23°/27°</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p>大后天</p>
+                    <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="天气图标" class="weather-icon">
+                    <p>22°/26°</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特色服务 -->
+        <div class="section-card">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">特色服务</h2>
+            <div class="grid grid-cols-3 gap-4 text-center text-gray-700 text-sm">
+                <div class="flex flex-col items-center p-2 bg-blue-50 rounded-lg">
+                    <i class="fas fa-calendar-check text-blue-600 text-2xl mb-2"></i>
+                    <span>钓位预约</span>
+                </div>
+                <div class="flex flex-col items-center p-2 bg-green-50 rounded-lg">
+                    <i class="fas fa-moon text-green-600 text-2xl mb-2"></i>
+                    <span>夜钓开放</span>
+                </div>
+                <div class="flex flex-col items-center p-2 bg-purple-50 rounded-lg">
+                    <i class="fas fa-toolbox text-purple-600 text-2xl mb-2"></i>
+                    <span>设备租借</span>
+                </div>
+                <div class="flex flex-col items-center p-2 bg-yellow-50 rounded-lg">
+                    <i class="fas fa-utensils text-yellow-600 text-2xl mb-2"></i>
+                    <span>餐饮服务</span>
+                </div>
+                <div class="flex flex-col items-center p-2 bg-red-50 rounded-lg">
+                    <i class="fas fa-parking text-red-600 text-2xl mb-2"></i>
+                    <span>免费停车</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 用户评价 -->
+        <div class="section-card">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">用户评价 (180)</h2>
+            <!-- 评价总览 -->
+            <div class="flex items-center mb-4">
+                <span class="text-4xl font-bold text-blue-600 mr-2">4.8</span>
+                <div class="flex flex-col">
+                    <div class="flex text-yellow-400 text-lg">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-600 text-sm">综合评分</span>
+                </div>
+            </div>
+            <!-- 环境评分 -->
+            <div class="mb-4">
+                <div class="flex items-center text-sm text-gray-700 mb-2">
+                    <span class="w-16">水质</span>
+                    <div class="flex text-yellow-400 mr-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span>5.0</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-700 mb-2">
+                    <span class="w-16">设施</span>
+                    <div class="flex text-yellow-400 mr-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <span>4.0</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-700">
+                    <span class="w-16">服务</span>
+                    <div class="flex text-yellow-400 mr-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>4.5</span>
+                </div>
+            </div>
+            <!-- 单条评价示例 -->
+            <div class="border-t border-gray-100 pt-4 mt-4">
+                <div class="flex items-center mb-2">
+                    <img src="https://source.unsplash.com/random/50x50?person" alt="用户头像" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-semibold text-gray-800">钓鱼小能手</p>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-2">水质很好，鱼口不错，老板人也很好，下次还会再来！</p>
+                <div class="flex space-x-2 mb-2">
+                    <img src="https://source.unsplash.com/random/100x100?fish-catch-1" alt="钓获图片" class="w-24 h-24 object-cover rounded-lg">
+                    <img src="https://source.unsplash.com/random/100x100?fishing-environment-1" alt="环境图片" class="w-24 h-24 object-cover rounded-lg">
+                </div>
+                <p class="text-gray-500 text-xs">2023-10-26</p>
+            </div>
+            <button class="w-full py-2 mt-4 text-blue-600 border border-blue-600 rounded-full font-semibold">查看更多评价</button>
+        </div>
+    </div>
+</body>
+</html>

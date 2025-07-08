@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钓场宝小程序 UI 预览</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
+            gap: 40px; /* iframe 之间的间距 */
+            padding: 40px;
+            background-color: #f0f2f5; /* 浅灰色背景 */
+            justify-content: flex-start; /* 从左侧开始排列 */
+            align-items: flex-start; /* 顶部对齐 */
+        }
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border: 8px solid #333; /* 模拟手机边框 */
+            border-radius: 40px; /* 手机圆角 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* 隐藏滚动条 */
+            position: relative;
+            background-color: white;
+        }
+        .phone-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        /* 模拟胶囊按钮 */
+        .capsule-button {
+            position: absolute;
+            top: 15px; /* 调整位置 */
+            right: 15px; /* 调整位置 */
+            width: 80px;
+            height: 28px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 14px;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            z-index: 10; /* 确保在最上层 */
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 5px;
+        }
+        .capsule-button::before, .capsule-button::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 16px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 钓场列表页 -->
+    <div class="phone-frame">
+        <div class="capsule-button"></div>
+        <iframe src="fishing_spot_list.html" title="钓场列表页"></iframe>
+    </div>
+
+    <!-- 钓场详情页 -->
+    <div class="phone-frame">
+        <div class="capsule-button"></div>
+        <iframe src="fishing_spot_detail.html" title="钓场详情页"></iframe>
+    </div>
+
+    <!-- 搜索筛选页 -->
+    <div class="phone-frame">
+        <div class="capsule-button"></div>
+        <iframe src="search_filter.html" title="搜索筛选页"></iframe>
+    </div>
+
+    <!-- 个人中心页 -->
+    <div class="phone-frame">
+        <div class="capsule-button"></div>
+        <iframe src="user_profile.html" title="个人中心页"></iframe>
+    </div>
+
+    <!-- 商家入驻申请页 -->
+    <div class="phone-frame">
+        <div class="capsule-button"></div>
+        <iframe src="merchant_apply.html" title="商家入驻申请页"></iframe>
+    </div>
+</body>
+</html>

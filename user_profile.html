@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            width: 375px;
+            height: 812px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* 隐藏滚动条 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: #f8f9fa; /* 浅灰色背景 */
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-header-gradient {
+            background: linear-gradient(to right top, #6a82fb, #fc5c7d); /* 清新柔和的渐变 */
+            padding-top: 4rem; /* 留出胶囊按钮和顶部空间 */
+            padding-bottom: 2rem;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem; /* 大圆角 */
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 轻微阴影 */
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f2f5; /* 浅色分割线 */
+            cursor: pointer;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- 顶部区域 - 模拟小程序胶囊按钮 -->
+    <div class="relative w-full pt-4 pb-2 px-4 bg-transparent z-20">
+        <!-- 胶囊按钮占位，实际由UI.html的phone-frame处理 -->
+        <div class="h-7"></div> 
+    </div>
+
+    <!-- 个人中心头部 -->
+    <div class="profile-header-gradient flex flex-col items-center text-white -mt-16 relative z-10">
+        <img src="https://source.unsplash.com/random/100x100?avatar,man" alt="用户头像" class="w-24 h-24 rounded-full border-4 border-white shadow-md mb-3">
+        <h1 class="text-2xl font-bold">钓鱼小能手</h1>
+        <p class="text-sm opacity-80">ID: 888888</p>
+    </div>
+
+    <!-- 功能入口列表 -->
+    <div class="flex-1 overflow-y-auto p-4 -mt-8 relative z-10">
+        <div class="section-card">
+            <div class="list-item">
+                <i class="fas fa-user-edit text-blue-500 text-xl mr-4"></i>
+                <span class="flex-grow text-gray-800 text-lg">资料编辑</span>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="list-item">
+                <i class="fas fa-bookmark text-yellow-500 text-xl mr-4"></i>
+                <span class="flex-grow text-gray-800 text-lg">我的收藏</span>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="list-item">
+                <i class="fas fa-toolbox text-green-500 text-xl mr-4"></i>
+                <span class="flex-grow text-gray-800 text-lg">我的装备库</span>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="list-item">
+                <i class="fas fa-handshake text-purple-500 text-xl mr-4"></i>
+                <span class="flex-grow text-gray-800 text-lg">商家入驻申请</span>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="list-item">
+                <i class="fas fa-cog text-gray-500 text-xl mr-4"></i>
+                <span class="flex-grow text-gray-800 text-lg">设置</span>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- 占位内容，确保页面可滚动 -->
+        <div class="h-20"></div>
+    </div>
+</body>
+</html>
